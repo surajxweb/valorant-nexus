@@ -1,0 +1,62 @@
+.container {
+    margin: 30px 40px;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 22px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 8px;
+}
+
+.container >* {
+    margin: 10px;
+}
+
+.mapBox {
+    height: 100px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #111;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+.mapName{
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7)
+}
+
+.agent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.agentName {
+    margin-top: 10px;
+}
+
+.stat {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.statTitle {
+    font-size: 18px;
+    
+    font-weight: bold;
+}
+
+.statData {
+    margin-top: 12px    ;
+    font-size: 22px;
+}

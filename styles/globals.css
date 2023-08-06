@@ -1,14 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 
 body {
-  
-  font-family: 'Alegreya Sans', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #ffffff;
+  background-image:  radial-gradient(#111116 0.6000000000000001px, transparent 0.6000000000000001px), radial-gradient(#111116 0.6000000000000001px, #ffffff 0.6000000000000001px);
+  background-size: 24px 24px;
+  background-position: 0 0,12px 12px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Alegreya Sans SC', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 a {
@@ -16,10 +18,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
+
 
 * {
   padding: 0;

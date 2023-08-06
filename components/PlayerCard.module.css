@@ -1,0 +1,68 @@
+.card {
+    margin:  60px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    max-width: 800px;
+    background-color: #e6e5e5;
+    color: #222;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.card > * {
+    padding: 20px;
+}
+
+.info {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    border: 5px double #111;
+    min-height: 370px;
+    min-width: 500px;
+}
+
+.name {
+    font-size: 50px;
+    text-shadow: -2px -2px 2px rgba(0, 0, 0, 0.3);
+    
+    font-weight: bold;
+}
+
+.tag {
+    font-size: 20px;
+}
+
+
+
+.rank {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.rankText {
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.stat {
+    margin: 0 0px;
+}
+
+.statTitle{
+    font-size: 20px;
+}
+
+.statData {
+    font-size: 30px;
+}

@@ -1,0 +1,47 @@
+.form {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.form form {
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.form label {
+font-size: 20px;
+}
+
+.form button {
+    height: 40px;
+    width: 50px;
+    background-color: #111;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: #464444;
+}
+
+.form input {
+    padding: 20px;
+    font: inherit;
+    margin: 10px 20px 10px 40px;
+    height: 30px;
+    width: 400px;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    height: 30px;
+    background-color: white;
+}
+
+.heading {
+    font-size: 22px;
+    text-align: center;
+    margin: 60px ;
+}

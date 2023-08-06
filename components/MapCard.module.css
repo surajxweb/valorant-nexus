@@ -1,0 +1,25 @@
+.container {
+    margin: 40px 20px;
+    padding: 20px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    background-color: wheat;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.container:hover {
+    transform: translateY(-8px);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.mapName {
+    font-size: 25px;
+}
+
+.mapName, .cord, .des {
+    background-color: rgba(255, 255, 255, 0.584);
+    padding: 10px;
+    border-radius: 6px;
+}

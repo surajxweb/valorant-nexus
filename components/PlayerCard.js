@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "./PlayerCard.module.css";
 
 export default function PlayerCard({
   playerName,
@@ -53,70 +54,56 @@ export default function PlayerCard({
       100
   );
 
+  //last Online
+
+  const lastDate = matchData[0].meta.started_at;
+  const dateObject = new Date(matchData[0].meta.started_at);
+  const lastDateOnline = new Date(
+    matchData[0].meta.started_at
+  ).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <div>
-      <div>
+    <div className={styles.card}>
+      <div className={styles.image}>
         <Image
           src={cardImage}
           alt="player card large"
-          height={320}
-          width={134}
+          height={370}
+          width={156}
         />
       </div>
-      <div>
-        <h2>{playerName}</h2>
-        <h3>{"#" + playerTag}</h3>
-        <div>
+      <div className={styles.info}>
+        <h2 className={styles.name}>{playerName}</h2>
+        <h3 className={styles.tag}>{"#" + playerTag}</h3>
+        <div className={styles.rank}>
           <Image src={rank} alt="rank" height={60} width={60} />
-          <div>{rankText}</div>
+          <div className={styles.rankText}>{rankText}</div>
         </div>
 
-        <div>
-          <div>
-            <div>K/D RATIO</div>
-            <div>{kdr}</div>
+        <div className={styles.stats}>
+          <div className={styles.stat}>
+            <div className={styles.statTitle}>K/D RATIO</div>
+            <div className={styles.statData}>{kdr}</div>
           </div>
-          <div>
-            <div>ADR</div>
-            <div>{adr}</div>
+          <div className={styles.stat}>
+            <div className={styles.statTitle}>ADR</div>
+            <div className={styles.statData}>{adr}</div>
           </div>
-          <div>
-            <div>WIN %</div>
-            <div>{winp}</div>
+          <div className={styles.stat}>
+            <div className={styles.statTitle}>WIN %</div>
+            <div className={styles.statData}>{winp}</div>
           </div>
-          <div>
-            <div>HS %</div>
-            <div>{hsp}</div>
+          <div className={styles.stat}>
+            <div className={styles.statTitle}>HS %</div>
+            <div className={styles.statData}>{hsp}</div>
           </div>
         </div>
+        <div>Data based on last 15 Competitive Games.</div>
       </div>
     </div>
   );
-}
-
-{
-  /* <h2>Name:</h2>
-      {mmrDetails && (
-        <Image
-          src={playerCard}
-          alt="player card large"
-          height={320}
-          width={134}
-        />
-      )}
-      {mmrDetails && <div>{mmrDetails.data.name}</div>}
-      <h2>Rank:</h2>
-      {mmrDetails && <div>{mmrDetails.data.currenttierpatched}</div>}
-      <h2>Last 10 Maps:</h2>
-      {matchDetails.length > 0 ? (
-        matchDetails.map((match) => (
-          <div key={match.meta.id}>{match.meta.map.name}</div>
-        ))
-      ) : (
-        <div>No match details available.</div>
-      )}
-      <div>K/D Ratio: {kdRatio}</div>
-      {/* <div>Headshot Percentage: {hsPercentage}%</div>
-      <div>Win Percentage: {winPercentage}%</div>
-      <div>ADR (Average Damage per Round): {adr}</div> */
 }

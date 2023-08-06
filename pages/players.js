@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import PlayerCard from "../components/PlayerCard";
 import MatchCard from "../components/MatchCard";
+import styles from "../styles/Players.module.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Player() {
   // State declarations
@@ -11,15 +14,18 @@ export default function Player() {
   const [matchDetails, setMatchDetails] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [playerCard, setPlayerCard] = useState("");
+  const [isError, setIsError] = useState(false);
 
   // Input change handler
   const handleInput = (event) => {
+    setIsError(false);
     const inputValue = event.target.value;
     setUserInput(inputValue);
   };
 
   // Function to fetch player data
-  const fetchPlayer = async () => {
+  const fetchPlayer = async (e) => {
+    e.preventDefault();
     // Getting name tag right
     const nameTag = userInput.replace(/\s/g, "%20").replace("#", "/");
 
@@ -40,7 +46,7 @@ export default function Player() {
       setPlayerRegion(pidData.data.region);
       setPlayerCard(pidData.data.card.large);
     } catch (e) {
-      console.log("Failed " + e);
+      setIsError(true);
     }
 
     // Clear the input field after fetching data
@@ -67,7 +73,7 @@ export default function Player() {
           setMMRDetails(mmrData);
           setMatchDetails(matchData.data); // Assuming matchData is an object with a 'data' property containing the array
         } catch (error) {
-          console.error("Error fetching MMR And Match details:", error);
+          setIsError(true);
         }
       }
     };
@@ -77,26 +83,48 @@ export default function Player() {
 
   return (
     <>
-      <form>
-        <input type="text" value={userInput} onChange={handleInput} />
-        <button type="button" onClick={fetchPlayer}>
-          <AiOutlineSend />
-        </button>
-      </form>
-      {mmrDetails && (
-        <PlayerCard
-          playerName={mmrDetails.data.name}
-          playerTag={mmrDetails.data.tag}
-          cardImage={playerCard}
-          matchData={matchDetails}
-          rank={mmrDetails.data.images.large}
-          rankText={mmrDetails.data.currenttierpatched}
-        />
+      <Navbar />
+      <div className={styles.form}>
+        <form>
+          <input
+            placeholder="Enter Your Name and #GameTag"
+            type="text"
+            value={userInput}
+            onChange={handleInput}
+            required
+          />
+
+          <button type="sumbit" onClick={fetchPlayer}>
+            <AiOutlineSend size="2em" color="#ccc" />
+          </button>
+        </form>
+      </div>
+      {isError && (
+        <div className={styles.error}>
+          Failed to Fetch Data! Make sure the entered name and #tag is correct
+          and is saperated by #, and your profile is public.
+        </div>
       )}
-      {matchDetails.length > 0 &&
-        matchDetails.map((match) => (
-          <MatchCard key={match.meta.id} match={match} />
-        ))}
+      <div className={styles.playerContainer}>
+        {mmrDetails && (
+          <PlayerCard
+            playerName={mmrDetails.data.name}
+            playerTag={mmrDetails.data.tag}
+            cardImage={playerCard}
+            matchData={matchDetails}
+            rank={mmrDetails.data.images.large}
+            rankText={mmrDetails.data.currenttierpatched}
+          />
+        )}
+      </div>
+      {mmrDetails && <h3 className={styles.heading}>Recent Games</h3>}
+      <div className={styles.matchList}>
+        {matchDetails.length > 0 &&
+          matchDetails.map((match) => (
+            <MatchCard key={match.meta.id} match={match} />
+          ))}
+      </div>
+      <Footer />
     </>
   );
 }

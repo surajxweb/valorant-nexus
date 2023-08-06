@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import styles from "./MatchCard.module.css";
 
 export default function MatchCard({ match }) {
   // Declaring states to store image URLs and tier data
@@ -60,31 +61,58 @@ export default function MatchCard({ match }) {
 
   return (
     <div
-      className="container"
-      style={{ backgroundColor: isGameWon ? "green" : "red" }}
+      className={styles.container}
+      style={{
+        background: isGameWon
+          ? "linear-gradient(90deg, rgba(8,114,31,1) 0%, rgba(35,153,77,1) 35%, rgba(143,221,9,1) 100%)"
+          : "linear-gradient(90deg, rgba(61,5,17,1) 0%, rgba(121,9,42,1) 35%, rgba(167,37,16,1) 100%)",
+        color: isGameWon ? "#111" : "#ccc",
+      }}
     >
-      {match.meta.map.name}
-      {match.stats.character.name}
+      <div
+        className={styles.mapBox}
+        style={{
+          backgroundImage: `url(${mapImageURL})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className={styles.mapName}>{match.meta.map.name}</div>
+      </div>
 
-      <Image src={mapImageURL} alt="map image" height={100} width={456} />
-      <Image src={agentImageURL} alt="agent image" height={100} width={100} />
+      <div className={styles.agent}>
+        <Image src={agentImageURL} alt="agent image" height={70} width={70} />
+        <div className={styles.agentName}>{match.stats.character.name}</div>
+      </div>
 
       {tierArray[match.stats.tier] && (
-        <>
+        <div className={styles.rank}>
           <Image
             src={tierArray[match.stats.tier].largeIcon}
             alt="rank image"
             height={56}
             width={56}
           />
-          {isGameWon ? "Won" : "Lost"}
-          {`${ourScore}-${enemyScore}`}
-          <div>{`${kills}/${deaths}/${assists}`}</div>
-          <div>{acs}</div>
-          <div>{adr}</div>
-          <div>{hsp}</div>
-        </>
+        </div>
       )}
+
+      <div className={styles.score}>{`${ourScore} - ${enemyScore}`}</div>
+      <div className={styles.stat}>
+        <div className={styles.statTitle}>K/D/A</div>
+        <div className={styles.statData}>{`${kills}/${deaths}/${assists}`}</div>
+      </div>
+      <div className={styles.stat}>
+        <div className={styles.statTitle}>ACS</div>
+        <div className={styles.statData}>{acs}</div>
+      </div>
+      <div className={styles.stat}>
+        <div className={styles.statTitle}>ADR</div>
+        <div className={styles.statData}>{adr}</div>
+      </div>
+      <div className={styles.stat}>
+        <div className={styles.statTitle}>HS%</div>
+        <div className={styles.statData}>{hsp}</div>
+      </div>
     </div>
   );
 }

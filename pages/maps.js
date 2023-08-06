@@ -1,11 +1,23 @@
+import MapCard from "../components/MapCard";
+import styles from "../styles/Maps.module.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
 export default function Maps({ maps }) {
   return (
     <div>
-      <div>
+      <Navbar />
+      <div className={styles.mapList}>
         {maps.map((map) => (
-          <div key={map.uuid}>{map.displayName}</div>
+          <MapCard
+            key={map.uuid}
+            name={map.displayName}
+            image={map.splash}
+            coordinates={map.coordinates}
+          />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

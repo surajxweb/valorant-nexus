@@ -8,6 +8,7 @@ export default function PlayerCard({
   cardImage,
   rankText,
   matchData,
+  numberOfGames,
 }) {
   //lets calculate everything? ok! kdr
   const totalKills = matchData.reduce(
@@ -56,8 +57,6 @@ export default function PlayerCard({
 
   //last Online
 
-  const lastDate = matchData[0].meta.started_at;
-  const dateObject = new Date(matchData[0].meta.started_at);
   const lastDateOnline = new Date(
     matchData[0].meta.started_at
   ).toLocaleDateString("en-US", {
@@ -65,6 +64,8 @@ export default function PlayerCard({
     month: "long",
     day: "numeric",
   });
+
+  console.log(numberOfGames);
 
   return (
     <div className={styles.card}>
@@ -102,7 +103,7 @@ export default function PlayerCard({
             <div className={styles.statData}>{hsp}</div>
           </div>
         </div>
-        <div>Data based on last 15 Competitive Games.</div>
+        <div>{`Data based on last ${numberOfGames} Competitive Games.`}</div>
       </div>
     </div>
   );

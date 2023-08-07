@@ -3,16 +3,13 @@ import Image from "next/image";
 import styles from "./MatchCard.module.css";
 
 export default function MatchCard({ match }) {
-  // Declaring states to store image URLs and tier data
   const [mapImageURL, setMapImageURL] = useState("");
   const [agentImageURL, setAgentImageURL] = useState("");
   const [tierArray, setTierArray] = useState([]);
 
-  // Fetching image URLs and tier data using useEffect
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Make parallel API requests using Promise.all for better performance
         const [mapResponse, agentResponse, tierResponse] = await Promise.all([
           fetch(`https://valorant-api.com/v1/maps/${match.meta.map.id}`),
           fetch(
@@ -27,7 +24,6 @@ export default function MatchCard({ match }) {
         const agentData = await agentResponse.json();
         const tierData = await tierResponse.json();
 
-        // Update the state with the fetched data
         setMapImageURL(mapData.data.listViewIcon);
         setAgentImageURL(agentData.data.displayIcon);
         setTierArray(tierData.data.tiers);
@@ -39,19 +35,15 @@ export default function MatchCard({ match }) {
     fetchData();
   }, [match.meta.map.id, match.stats.character.id]);
 
-  // Calculating game results and scores
   const { team } = match.stats;
   const { red, blue } = match.teams;
 
-  // Determine if the game is won or lost using ternary operators
   const isGameWon =
     (team === "Blue" && blue > red) || (team === "Red" && red > blue);
 
-  // Determine our team's score and enemy team's score using ternary operators
   const ourScore = team === "Red" ? red : blue;
   const enemyScore = team === "Red" ? blue : red;
 
-  // Calculate KDA, ACS, ADR, and HSP directly using destructured stats object
   const { kills, deaths, assists, score } = match.stats;
   const { made } = match.stats.damage;
   const { head, body, leg } = match.stats.shots;
@@ -69,21 +61,25 @@ export default function MatchCard({ match }) {
         color: isGameWon ? "#111" : "#ccc",
       }}
     >
-      <div
-        className={styles.mapBox}
-        style={{
-          backgroundImage: `url(${mapImageURL})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className={styles.mapName}>{match.meta.map.name}</div>
-      </div>
+      {mapImageURL && (
+        <div
+          className={styles.mapBox}
+          style={{
+            backgroundImage: `url(${mapImageURL})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className={styles.mapName}>{match.meta.map.name}</div>
+        </div>
+      )}
 
-      <div className={styles.agent}>
-        <Image src={agentImageURL} alt="agent image" height={70} width={70} />
-        <div className={styles.agentName}>{match.stats.character.name}</div>
-      </div>
+      {agentImageURL && (
+        <div className={styles.agent}>
+          <Image src={agentImageURL} alt="agent image" height={70} width={70} />
+          <div className={styles.agentName}>{match.stats.character.name}</div>
+        </div>
+      )}
 
       {tierArray[match.stats.tier] && (
         <div className={styles.rank}>

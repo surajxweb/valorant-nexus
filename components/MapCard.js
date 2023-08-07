@@ -8,7 +8,7 @@ export default function MapCard({ name, image, coordinates }) {
       {/* <Link href={`/maps/${name.toLowerCase()}`}> */}
       <div className={styles.container}>
         <div className={styles.image}>
-          <Image src={image} alt="map image" height={200} width={355.56} />
+          <Image src={image} alt="map image" height={200} width={356} />
         </div>
         <h2 className={styles.mapName}>{name}</h2>
         <div className={styles.cord}>{coordinates}</div>

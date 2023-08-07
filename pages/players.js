@@ -7,6 +7,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export default function Player() {
+  //no of games (max value is 60)
+  const numberOfGames = 30;
   // State declarations
   const [playerID, setPlayerID] = useState(null);
   const [playerRegion, setPlayerRegion] = useState(null);
@@ -63,7 +65,7 @@ export default function Player() {
           );
 
           const matchResponse = await fetch(
-            `https://api.henrikdev.xyz/valorant/v1/by-puuid/lifetime/matches/${playerRegion}/${playerID}?mode=competitive&page=1&size=15`
+            `https://api.henrikdev.xyz/valorant/v1/by-puuid/lifetime/matches/${playerRegion}/${playerID}?mode=competitive&page=1&size=${numberOfGames}`
           );
 
           const mmrData = await mmrResponse.json();
@@ -114,10 +116,15 @@ export default function Player() {
             matchData={matchDetails}
             rank={mmrDetails.data.images.large}
             rankText={mmrDetails.data.currenttierpatched}
+            numberOfGames={numberOfGames}
           />
         )}
       </div>
-      {mmrDetails && <h3 className={styles.heading}>Recent Games</h3>}
+      {mmrDetails && (
+        <h3
+          className={styles.heading}
+        >{`A look at the last ${numberOfGames} games.`}</h3>
+      )}
       <div className={styles.matchList}>
         {matchDetails.length > 0 &&
           matchDetails.map((match) => (
